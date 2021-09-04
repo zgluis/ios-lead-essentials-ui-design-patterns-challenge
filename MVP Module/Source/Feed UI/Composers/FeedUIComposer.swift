@@ -20,7 +20,8 @@ public final class FeedUIComposer {
 			feedView: FeedViewAdapter(
 				controller: feedController,
 				imageLoader: MainQueueDispatchDecorator(decoratee: imageLoader)),
-			loadingView: WeakRefVirtualProxy(feedController))
+			loadingView: WeakRefVirtualProxy(feedController),
+			errorView: FeedErrorViewAdapter(controller: feedController))
 
 		return feedController
 	}
@@ -33,4 +34,18 @@ public final class FeedUIComposer {
 		feedController.title = title
 		return feedController
 	}
+}
+
+final class FeedErrorViewAdapter: FeedErrorView {
+	private weak var controller: FeedViewController?
+
+	init(controller: FeedViewController) {
+		self.controller = controller
+	}
+
+	func show(message: String) {
+		controller?.errorView.show(message: "")
+	}
+
+	func hideMessage() {}
 }

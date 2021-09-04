@@ -13,13 +13,20 @@ protocol FeedView {
 	func display(_ viewModel: FeedViewModel)
 }
 
+protocol FeedErrorView {
+	func show(message: String)
+	func hideMessage()
+}
+
 final class FeedPresenter {
 	private let feedView: FeedView
 	private let loadingView: FeedLoadingView
+	private let errorView: FeedErrorView
 
-	init(feedView: FeedView, loadingView: FeedLoadingView) {
+	init(feedView: FeedView, loadingView: FeedLoadingView, errorView: FeedErrorView) {
 		self.feedView = feedView
 		self.loadingView = loadingView
+		self.errorView = errorView
 	}
 
 	func didStartLoadingFeed() {
@@ -32,6 +39,7 @@ final class FeedPresenter {
 	}
 
 	func didFinishLoadingFeed(with error: Error) {
+		errorView.show(message: "")
 		loadingView.display(FeedLoadingViewModel(isLoading: false))
 	}
 }
