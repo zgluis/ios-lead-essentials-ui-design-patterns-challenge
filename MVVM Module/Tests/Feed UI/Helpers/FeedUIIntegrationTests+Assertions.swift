@@ -17,6 +17,10 @@ extension FeedUIIntegrationTests {
 		}
 	}
 
+	func assertThat(_ sut: FeedViewController, isShowingErrorMessage visible: Bool, file: StaticString = #filePath, line: UInt = #line) {
+		XCTAssertEqual((sut.errorMessage != nil), visible, "Expected errorMessage to be \(visible ? "not nil" : "nil"), instead got \(sut.errorMessage ?? "")")
+	}
+
 	func assertThat(_ sut: FeedViewController, hasViewConfiguredFor image: FeedImage, at index: Int, file: StaticString = #filePath, line: UInt = #line) {
 		let view = sut.feedImageView(at: index)
 
