@@ -35,17 +35,3 @@ public final class FeedUIComposer {
 		return feedController
 	}
 }
-
-final class FeedErrorViewAdapter: FeedErrorView {
-	private weak var controller: FeedViewController?
-
-	init(controller: FeedViewController) {
-		self.controller = controller
-	}
-
-	func show(message: String) {
-		controller?.errorView.show(message: "")
-	}
-
-	func hideMessage() {}
-}
