@@ -19,7 +19,7 @@ final class FeedErrorViewAdapter: FeedErrorView {
 		controller?.errorView.show(message: Localized.Feed.connectionError)
 	}
 
-	func hideMessage() {
+	func hide() {
 		controller?.errorView.hideMessage()
 	}
 }
