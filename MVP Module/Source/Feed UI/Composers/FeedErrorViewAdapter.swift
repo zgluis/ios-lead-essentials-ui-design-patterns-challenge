@@ -15,9 +15,11 @@ final class FeedErrorViewAdapter: FeedErrorView {
 		self.controller = controller
 	}
 
-	func show(message: String) {
-		controller?.errorView.show(message: "")
+	func show() {
+		controller?.errorView.show(message: Localized.Feed.connectionError)
 	}
 
-	func hideMessage() {}
+	func hideMessage() {
+		controller?.errorView.hideMessage()
+	}
 }
