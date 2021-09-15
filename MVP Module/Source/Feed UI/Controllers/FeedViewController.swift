@@ -75,3 +75,13 @@ public final class FeedViewController: UITableViewController, UITableViewDataSou
 		cellController(forRowAt: indexPath).cancelLoad()
 	}
 }
+
+extension FeedViewController: FeedErrorView {
+	func show() {
+		errorView.show(message: Localized.Feed.connectionError)
+	}
+
+	func hide() {
+		errorView.hideMessage()
+	}
+}
