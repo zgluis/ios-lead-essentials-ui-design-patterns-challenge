@@ -14,7 +14,7 @@ protocol FeedView {
 }
 
 protocol FeedErrorView {
-	func show()
+	func show(message: String)
 	func hide()
 }
 
@@ -40,7 +40,7 @@ final class FeedPresenter {
 	}
 
 	func didFinishLoadingFeed(with error: Error) {
-		errorView.show()
+		errorView.show(message: Localized.Feed.connectionError)
 		loadingView.display(FeedLoadingViewModel(isLoading: false))
 	}
 }

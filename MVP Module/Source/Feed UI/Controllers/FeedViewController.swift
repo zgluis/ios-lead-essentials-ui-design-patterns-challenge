@@ -77,8 +77,8 @@ public final class FeedViewController: UITableViewController, UITableViewDataSou
 }
 
 extension FeedViewController: FeedErrorView {
-	func show() {
-		errorView.show(message: Localized.Feed.connectionError)
+	func show(message: String) {
+		errorView.show(message: message)
 	}
 
 	func hide() {
