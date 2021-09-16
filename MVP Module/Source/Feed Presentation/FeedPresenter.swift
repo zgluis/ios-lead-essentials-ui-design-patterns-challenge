@@ -13,9 +13,12 @@ protocol FeedView {
 	func display(_ viewModel: FeedViewModel)
 }
 
+struct FeedErrorViewModel {
+	let message: String?
+}
+
 protocol FeedErrorView {
-	func show(message: String)
-	func hide()
+	func display(_ viewModel: FeedErrorViewModel)
 }
 
 final class FeedPresenter {
@@ -30,7 +33,7 @@ final class FeedPresenter {
 	}
 
 	func didStartLoadingFeed() {
-		errorView.hide()
+		errorView.display(FeedErrorViewModel(message: nil))
 		loadingView.display(FeedLoadingViewModel(isLoading: true))
 	}
 
@@ -40,7 +43,7 @@ final class FeedPresenter {
 	}
 
 	func didFinishLoadingFeed(with error: Error) {
-		errorView.show(message: Localized.Feed.connectionError)
+		errorView.display(FeedErrorViewModel(message: Localized.Feed.connectionError))
 		loadingView.display(FeedLoadingViewModel(isLoading: false))
 	}
 }
