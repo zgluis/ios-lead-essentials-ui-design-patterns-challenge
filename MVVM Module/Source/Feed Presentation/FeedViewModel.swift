@@ -7,8 +7,6 @@ import FeedFeature
 
 final class FeedViewModel {
 	typealias Observer<T> = (T) -> Void
-	typealias ErrorMessage = String
-
 	private let feedLoader: FeedLoader
 
 	init(feedLoader: FeedLoader) {
@@ -21,15 +19,16 @@ final class FeedViewModel {
 
 	var onLoadingStateChange: Observer<Bool>?
 	var onFeedLoad: Observer<[FeedImage]>?
-	var onFeedLoadFailure: Observer<ErrorMessage>?
+	var onErrorStateChange: Observer<String?>?
 
 	func loadFeed() {
 		onLoadingStateChange?(true)
+		onErrorStateChange?(nil)
 		feedLoader.load { [weak self] result in
 			if let feed = try? result.get() {
 				self?.onFeedLoad?(feed)
 			} else {
-				self?.onFeedLoadFailure?(Localized.Feed.connectionError)
+				self?.onErrorStateChange?(Localized.Feed.connectionError)
 			}
 			self?.onLoadingStateChange?(false)
 		}
